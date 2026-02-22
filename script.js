@@ -124,7 +124,7 @@ mainContainer.addEventListener('click',function(event){
     const cross =parentNode.querySelector('.cross-platform').innerText
 
     // majkkhaaer je ont applicate oita chanage akhane hoi
-    parentNode.querySelector('.Not-Applied-button').innerText ='Rejectedbox'
+    parentNode.querySelector('.Not-Applied-button').innerText ='Rejected'
     
     const cardInfo ={
         mobileShop,
