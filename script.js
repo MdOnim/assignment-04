@@ -19,12 +19,16 @@ const filterSectoin =document.getElementById('filtered-section')
 const allfilterbtn = document.getElementById("all-filter-btn")
 const interviebtn = document.getElementById("Interview-filter-btn")
 const rejectedbtn = document.getElementById("Rejected-filter-btn")
-
+const noJobs =document.getElementById('jobs-available')
+const jobsCount =document.getElementById("Available-Jobs")
 
 function calculateCount(){
     total.innerText = allcardParent.children.length
     interview.innerText =Interviewbox.length
     rejected.innerText =Rejectedbox.length
+    jobsCount.innerText=allcardParent.children.length
+
+
 }
 // function call korlam
 calculateCount()
@@ -50,17 +54,29 @@ function toggleStyle(id){
     selected.classList.add('bg-[#3B82F6]' ,'text-white')
 
 
-    if(id=='Interview-filter-btn'){
+
+    if(id=='all-filter-btn'){
+       allcardParent.classList.remove('hidden');
+        filterSectoin.classList.add('hidden')
+        noJobs.classList.add("hidden")
+    }else if(id=='Interview-filter-btn'){
         allcardParent.classList.add('hidden');
         filterSectoin.classList.remove('hidden')
-        renderInterview()
+        filterSectoin.innerHTML=''
 
-    }else if(id=='all-filter-btn'){
-        allcardParent.classList.remove('hidden');
-        filterSectoin.classList.add('hidden')
+    if(Interviewbox.length === 0){
+        noJobs.classList.remove('hidden')
+        filterSectoin.innerHTML=''
+    }else{
+        noJobs.classList.add('hidden')
+    }
+    renderInterview()
     }else if(id== 'Rejected-filter-btn'){
         allcardParent.classList.add('hidden');
         filterSectoin.classList.remove('hidden')
+        if(Rejectedbox.length ===0){
+            noJobs.classList.remove('hidden')
+        }
         renderrejected()
         
     }
@@ -86,6 +102,8 @@ mainContainer.addEventListener('click',function(event){
     const fullTime =parentNode.querySelector('.full-time').innerText
     const notApplicate =parentNode.querySelector('.Not-Applied-button').innerText
     const cross =parentNode.querySelector('.cross-platform').innerText
+    
+    
 
     // majkkhaaer je ont applicate oita chanage akhane hoi
     parentNode.querySelector('.Not-Applied-button').innerText ='interview'
@@ -123,6 +141,8 @@ mainContainer.addEventListener('click',function(event){
     const notApplicate =parentNode.querySelector('.Not-Applied-button').innerText
     const cross =parentNode.querySelector('.cross-platform').innerText
 
+
+
     // majkkhaaer je ont applicate oita chanage akhane hoi
     parentNode.querySelector('.Not-Applied-button').innerText ='Rejected'
     
@@ -148,6 +168,11 @@ mainContainer.addEventListener('click',function(event){
     calculateCount()
     
     
+    }else if(event.target.closest('.delete-btn')){
+    const delteParent = event.target.parentNode.parentNode.parentNode;
+    delteParent.remove('div')
+    calculateCount()
+        
     }
 })
 
@@ -161,7 +186,7 @@ function renderInterview (){
     for (let interview of Interviewbox){
         console.log(interview)
         let div = document.createElement('div');
-        div.className ='job-card flex justify-between border border-gray-300 rounded-sm shadow-lg bg-[#FFFFFF] md:gap-9'
+        div.className  =' mb-5  job-card flex justify-between border border-gray-300 rounded-sm shadow-lg bg-[#FFFFFF] md:gap-9'
         div.innerHTML=`
         
         <div class="p-5">
@@ -197,7 +222,7 @@ function renderrejected (){
     for (let rejected of Rejectedbox){
         console.log(interview)
         let div = document.createElement('div');
-        div.className ='job-card flex justify-between border border-gray-300 rounded-sm shadow-lg bg-[#FFFFFF] md:gap-9'
+        div.className =' mb-5 job-card flex justify-between border border-gray-300 rounded-sm shadow-lg bg-[#FFFFFF] md:gap-9'
         div.innerHTML=`
         
         <div class="p-5">
