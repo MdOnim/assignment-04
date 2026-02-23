@@ -2,20 +2,20 @@ let Interviewbox =[];
 let Rejectedbox =[];
 let currentStatus ='all';
 
-// part 1 total 
-// Total ,Interview , Rejected niye aslam
+
+
 
 let total = document.getElementById("total");
 let interview = document.getElementById("interview");
 let rejected = document.getElementById("rejected")
 
-// all card parent dore niye aslam 
+
 const allcardParent = document.getElementById("all-card")
-// main container k dore niye aslam 
+ 
 const mainContainer = document.querySelector('main');
-// filter ar jonno dorlam 
+
 const filterSectoin =document.getElementById('filtered-section')
-// alll filter button  Available Jobs ar nicher button gulo 
+
 const allfilterbtn = document.getElementById("all-filter-btn")
 const interviebtn = document.getElementById("Interview-filter-btn")
 const rejectedbtn = document.getElementById("Rejected-filter-btn")
@@ -30,13 +30,13 @@ function calculateCount(){
 
 
 }
-// function call korlam
+
 calculateCount()
 
 
-// btn toggle function 
+
 function toggleStyle(id){
-    // blule soralam 
+    
     allfilterbtn.classList.remove('bg-[#3B82F6]', 'text-white')
     interviebtn.classList.remove('bg-[#3B82F6]', 'text-white')
     rejectedbtn.classList.remove('bg-[#3B82F6]', 'text-white')
@@ -86,13 +86,13 @@ function toggleStyle(id){
 }
 
 
-// main function a add even listener lagailam 
+
 
 
 
 mainContainer.addEventListener('click',function(event){
 
-    // console.log(event.target.classList.contains('interview-btn'))
+    
     
     if(event.target.classList.contains('interview-btn')){
     
@@ -105,7 +105,7 @@ mainContainer.addEventListener('click',function(event){
     
     
 
-    // majkkhaaer je ont applicate oita chanage akhane hoi
+   
     parentNode.querySelector('.Not-Applied-button').innerText ='interview'
     
     const cardInfo ={
@@ -116,7 +116,7 @@ mainContainer.addEventListener('click',function(event){
         cross
     }
     
-    // find deye chek kore deklam arrr ar vitore info ache kina
+    
     
     const mobileShopExist = Interviewbox.find(item=> item.mobileShop == cardInfo.mobileShop )
     if(!mobileShopExist){
@@ -143,7 +143,7 @@ mainContainer.addEventListener('click',function(event){
 
 
 
-    // majkkhaaer je ont applicate oita chanage akhane hoi
+    
     parentNode.querySelector('.Not-Applied-button').innerText ='Rejected'
     
     const cardInfo ={
@@ -154,7 +154,7 @@ mainContainer.addEventListener('click',function(event){
         cross
     }
     
-    // find deye chek kore deklam arrr ar vitore info ache kina
+    
     
     const mobileShopExist = Rejectedbox.find(item=> item.mobileShop == cardInfo.mobileShop )
     if(!mobileShopExist){
@@ -178,10 +178,10 @@ mainContainer.addEventListener('click',function(event){
 
 
 
-// render function
+
 
 function renderInterview (){
-    // aysecton tumo faka thakako nojobs id deye dekho kaj kore kina
+    
     filterSectoin.innerText=''
     for (let interview of Interviewbox){
         console.log(interview)
@@ -215,9 +215,9 @@ function renderInterview (){
 
 
 
-// rejected 
+
 function renderrejected (){
-    // aysecton tumo faka thakako nojobs id deye dekho kaj kore kina
+   
     filterSectoin.innerText=''
     for (let rejected of Rejectedbox){
         console.log(interview)
