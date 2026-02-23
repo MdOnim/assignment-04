@@ -23,10 +23,21 @@ const noJobs =document.getElementById('jobs-available')
 const jobsCount =document.getElementById("Available-Jobs")
 
 function calculateCount(){
-    total.innerText = allcardParent.children.length
-    interview.innerText =Interviewbox.length
-    rejected.innerText =Rejectedbox.length
-    jobsCount.innerText=allcardParent.children.length
+   const totalJobs = allcardParent.children.length
+    total.innerText = totalJobs
+    interview.innerText =Interviewbox.length;
+    rejected.innerText =Rejectedbox.length;
+
+     if(currentStatus === 'Interview-filter-btn'){
+        jobsCount.innerText = `${Interviewbox.length} of ${totalJobs} jobs`;
+    }
+    else if(currentStatus === 'Rejected-filter-btn'){
+        jobsCount.innerText = `${Rejectedbox.length} of ${totalJobs} jobs`;
+    }
+    else{
+        jobsCount.innerText = `${totalJobs} jobs`;
+    }
+    
 
 
 }
@@ -81,7 +92,7 @@ function toggleStyle(id){
         
     }
 
-
+calculateCount()
     
 }
 
@@ -170,9 +181,15 @@ mainContainer.addEventListener('click',function(event){
     
     }else if(event.target.closest('.delete-btn')){
     const card = event.target.closest('.job-card')
-    const delteParent = event.target.parentNode.parentNode.parentNode;
-    delteParent.remove('div')
-    calculateCount()
+    if(card){
+         const shopName = card.querySelector('.mobile-shop').innerText;
+         card.remove();
+         Interviewbox = Interviewbox.filter(item => item.mobileShop !== shopName);
+         Rejectedbox = Rejectedbox.filter(item => item.mobileShop !== shopName);
+          calculateCount()
+          if(currentStatus == 'Interview-filter-btn') renderInterview();
+          else if(currentStatus == 'Rejected-filter-btn') renderRejected();
+    }
         
     }
 
@@ -184,8 +201,16 @@ mainContainer.addEventListener('click',function(event){
 
 
 function renderInterview (){
-    
     filterSectoin.innerText=''
+
+    if(Interviewbox.length===0){
+        noJobs.classList.remove('hidden');
+    }else{
+        noJobs.classList.add('hidden');
+    }
+
+
+
     for (let interview of Interviewbox){
         console.log(interview)
         let div = document.createElement('div');
@@ -220,8 +245,12 @@ function renderInterview (){
 
 
 function renderrejected (){
-   
     filterSectoin.innerText=''
+    if(Rejectedbox.length==0){
+        noJobs.classList.remove('hidden')
+    }else{
+        noJobs.classList.add('hidden');
+    }
     for (let rejected of Rejectedbox){
         console.log(interview)
         let div = document.createElement('div');
