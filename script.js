@@ -169,11 +169,16 @@ mainContainer.addEventListener('click',function(event){
     
     
     }else if(event.target.closest('.delete-btn')){
-    const delteParent = event.target.parentNode.parentNode.parentNode;
-    delteParent.remove('div')
-    calculateCount()
+    const card = event.target.closest('.job-card')
+    if(card){
+        card.remove();
+        calculateCount()
+
+    }
         
     }
+
+
 })
 
 
